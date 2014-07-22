@@ -12,7 +12,8 @@ I: Description of this Project
 
 II:The run_analysis.R script
 ==============================
-| First Header | Second Header | 
+##Parameters used in run_analysis.R##
+|First Header | Second Header | 
 |--------------|---------------| 
 |  Row1 Cell1  |  Row1 Cell2   | 
 |  Row2 Cell1  |  Row2 Cell2   |
