@@ -12,8 +12,9 @@ I: Description of this Project
 
 II:The run_analysis.R script
 ==============================
-##Parameters used in run_analysis.R##
-|First Header | Second Header | 
+Variable list and descriptions
+------------------------------
+|Variable Name | Description | 
 |--------------|---------------| 
 |  Row1 Cell1  |  Row1 Cell2   | 
 |  Row2 Cell1  |  Row2 Cell2   |
