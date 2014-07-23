@@ -44,6 +44,8 @@ III:Steps to reproduce this project
 IV:Result
 ===================
 
+The **tidy_dataset.txt** contains the output observations which has been cleaned up with the previous requirement.
+The **summary_data_average.txt** containes the mean value of all 66 variables grouped by ActvitityName and Subject.
 
 
 
