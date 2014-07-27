@@ -29,7 +29,8 @@ II:The run_analysis.R script
 
 2.2 Steps to solve the above steps
 --------------------------------------
-    Step One:
+    Step One: Download the original data file with the URL link. Then unizp the compressed file into the same directory.
+              The list of filename contained in unziped folder can be accessed with the **fname** variable.
   ----------------------
     path<-getwd()
     #When use download.file() remember to change https to http
@@ -40,10 +41,29 @@ II:The run_analysis.R script
      }
     download.file(url,file.path(path,filename))
     unzip(file.path(path,filename),exdir=path,overwrite=TRUE)
-   #Or you can unzip the download file manually by yourself
+    pathIn<-file.path(path,"UCI HAR Dataset")
+    fname=list.files(pathIn,recursive=TRUE)
+    
 
+--------------------------------
+    Step Two: Read the Subject,Data and Label file for both training and testing data in R. 
+              Merge the traning and testing data using **rbind()** command. 
+              The dimension of the original and merged dataset can be seen with **dim()** command.
+  --------------------
+    trainSubject<-read.table(paste0(pathIn,"/",fname[26]))
+    trainData<-read.table(paste0(pathIn,"/",fname[27]))
+    trainLabel<-read.table(paste0(pathIn,"/",fname[28]))
+    testSubject<-read.table(paste0(pathIn,"/",fname[14]))
+    testData<-read.table(paste0(pathIn,"/",fname[15]))
+    testLabel<-read.table(paste0(pathIn,"/",fname[16]))
+    dim(trainSubject);dim(trainData);dim(trainLabel) # [7352, 1];[7352 , 561];[7352, 1]
+    dim(testSubject);dim(testData);dim(testLabel)    # [2947 ,1];[2947 , 561];[7352,1]
+    mergedSubject<-rbind(trainSubject,testSubject)
+    mergedData<-rbind(trainData,testData)
+    mergedLabel<-rbind(trainLabel,testLabel)
+    
 
-
+    dim(mergedSubject);dim(mergedData);dim(mergedLabel) #[10299, 1];[10299, 561];[10299,1]
 
 
 
