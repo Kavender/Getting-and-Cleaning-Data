@@ -29,7 +29,19 @@ II:The run_analysis.R script
 
 2.2 Steps to solve the above steps
 --------------------------------------
-    Before 
+    Step One:
+  ----------------------
+    path<-getwd()
+    #When use download.file() remember to change https to http
+    url<-"http://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+    filename<-"Dataset.zip"
+    if (!file.exists(path)){
+     dir.create(path)
+     }
+    download.file(url,file.path(path,filename))
+    unzip(file.path(path,filename),exdir=path,overwrite=TRUE)
+   #Or you can unzip the download file manually by yourself
+
 
 
 
