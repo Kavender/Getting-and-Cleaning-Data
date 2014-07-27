@@ -61,11 +61,30 @@ II:The run_analysis.R script
     mergedSubject<-rbind(trainSubject,testSubject)
     mergedData<-rbind(trainData,testData)
     mergedLabel<-rbind(trainLabel,testLabel)
-    
-
     dim(mergedSubject);dim(mergedData);dim(mergedLabel) #[10299, 1];[10299, 561];[10299,1]
-
-
+----------------------------------------------------------------------------------
+    Step Three: Read the **measurement** from the feature dataset.
+                Rename the column name to make it comparable to the column name in the previous merged datasets. 
+                Subset the merged data based on the FeatureID/"measurement".
+ ---------------
+    features<-read.table(paste0(pathIn,"/",fname[2]))
+    dim(features)
+    colnames(features)<-c("FeatureID","FeatureName")
+    subfeature<-features[grepl("mean\\(\\)|std\\(\\)",features$FeatureName),]
+    subfeature$feature_colname<-paste0("V",subfeature$FeatureID)
+    head(subfeature)
+    subData<-mergedData[,subfeature$FeatureID]
+    names(subData)<-subfeature$FeatureName
+    names(subData)<-tolower(gsub("\\(|\\)","",names(subData)))
+------------------------------------------------
+    Step Four: Read in the **Activity** file and rename the activity with Descriptive name as Merged Label.
+  ----------------
+    activity_label<-read.table(paste0(pathIn,"/",fname[1]))
+    colnames(activity_label)<-c("ActivityNum","ActivityName")
+    activity_label[,2]<-gsub("_","",tolower(activity_label[,2]))
+    mergedLabel[,1]<-activity_label[mergedLabel[,1],2]
+    colnames(mergedLabel)<-"ActivityName"
+----------------------------------------------------
 
 
 
