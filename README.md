@@ -17,8 +17,8 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 II:The run_analysis.R script
 ==============================
 
-
-The tasks needed to be fulfilled:
+2.1 The run_analysis.R file is writen in R to fulfill the following tasks:
+--------------------------------------------------------------------------
 
 1.  Merges the training and the test sets to create one data set.
 2.  Extracts only the measurements on the mean and standard deviation for each measurement. 
@@ -27,12 +27,9 @@ The tasks needed to be fulfilled:
 5.  Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 
-
-
-
-III:Steps to reproduce this project
-===============================
-
+2.2 Steps to solve the above steps
+--------------------------------------
+    Before 
 
 
 
@@ -41,21 +38,14 @@ III:Steps to reproduce this project
 
 
 
-IV:Result
+
+III:Result
 ===================
 
 The **tidy_dataset.txt** contains the output observations which has been cleaned up with the previous requirement.
 The **summary_data_average.txt** containes the mean value of all 66 variables grouped by ActvitityName and Subject.
 
-
-
-
-
-
-
-
-
-
+Both the cleanedup data files and the run_analysis.R file are listed in this branch. You can easily reproduce the results with my R code. 
 
 
 © Kavender 2014 All Rights reserved.
