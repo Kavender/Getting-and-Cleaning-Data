@@ -45,10 +45,11 @@ II:The run_analysis.R script
     fname=list.files(pathIn,recursive=TRUE)
     
 
---------------------------------
+
     Step Two: Read the Subject,Data and Label file for both training and testing data in R. 
               Merge the traning and testing data using **rbind()** command. 
               The dimension of the original and merged dataset can be seen with **dim()** command.
+              This Step solve the First Task.
   --------------------
     trainSubject<-read.table(paste0(pathIn,"/",fname[26]))
     trainData<-read.table(paste0(pathIn,"/",fname[27]))
@@ -62,10 +63,11 @@ II:The run_analysis.R script
     mergedData<-rbind(trainData,testData)
     mergedLabel<-rbind(trainLabel,testLabel)
     dim(mergedSubject);dim(mergedData);dim(mergedLabel) #[10299, 1];[10299, 561];[10299,1]
-----------------------------------------------------------------------------------
+
     Step Three: Read the **measurement** from the feature dataset.
                 Rename the column name to make it comparable to the column name in the previous merged datasets. 
                 Subset the merged data based on the FeatureID/"measurement".
+                This Step solve the Second Task.
  ---------------
     features<-read.table(paste0(pathIn,"/",fname[2]))
     dim(features)
@@ -76,16 +78,34 @@ II:The run_analysis.R script
     subData<-mergedData[,subfeature$FeatureID]
     names(subData)<-subfeature$FeatureName
     names(subData)<-tolower(gsub("\\(|\\)","",names(subData)))
-------------------------------------------------
+
     Step Four: Read in the **Activity** file and rename the activity with Descriptive name as Merged Label.
+               This Step solve the Third Task.
   ----------------
     activity_label<-read.table(paste0(pathIn,"/",fname[1]))
     colnames(activity_label)<-c("ActivityNum","ActivityName")
     activity_label[,2]<-gsub("_","",tolower(activity_label[,2]))
     mergedLabel[,1]<-activity_label[mergedLabel[,1],2]
     colnames(mergedLabel)<-"ActivityName"
-----------------------------------------------------
 
+    Step Five: Label the dataset with descriptive variable names, which is named as **cleanedData**.
+               The cleaned dataset is output as txt file, named **tidy_dataset.txt**, stored in the same directory.
+               This Step solve the Forth Task.
+   ---------
+    colnames(mergedSubject)<-"Subject"
+    cleanedData<-cbind(mergedSubject,mergedLabel,subData)
+    dim(cleanedData)
+    write.table(cleanedData,"tiday_dataset.txt")
+   
+   Step Sixth: Use the **plyr** and **reshape2** library to get the mean of each variable for each activity and each   subject
+               This Step solve the Fifth Task.
+   -------------
+    library(plyr)
+    library(reshape2)
+    meltData<-melt(cleanedData,id=c("Subject","ActivityName"))
+    summary_means<-ddply(meltData,c("variable","ActivityName","Subject"),summarise,
+                     mean=mean(value))
+    write.table(summary_means,"summary_data_average.txt")
 
 
 
