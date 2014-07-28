@@ -6,6 +6,6 @@ Variable list and descriptions
 ------------------------------
 |Variable Name | Description | 
 |--------------|---------------| 
-|  Row1 Cell1  |  Row1 Cell2   | 
-|  Row2 Cell1  |  Row2 Cell2   |
-|              |               |
+|  path  |  The address of current directory  | 
+|  url  |  The web link to the dataset that need to be download  |
+|   fname           |   The list of file names in the unziped file folder            |
